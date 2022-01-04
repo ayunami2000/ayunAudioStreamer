@@ -12,7 +12,7 @@ public class PlaySong {
             int vol = songInfo.length == 4 ? Integer.parseInt(songInfo[3]) : 127;
             Thread.sleep((tick - ticks) * 50);
             ticks = tick;
-            Main.currData+="\n"+instr+","+(((double) vol) / 127.0)+","+(.5 * (Math.pow(2, ((double) note) / 12.0)));
+            Main.currData+=instr+","+(((double) vol) / 127.0)+","+(.5 * (Math.pow(2, ((double) note) / 12.0)))+"\n";
             Main.updData=true;
         }
     }
