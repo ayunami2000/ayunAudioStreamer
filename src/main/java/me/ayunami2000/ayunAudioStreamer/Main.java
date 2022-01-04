@@ -16,6 +16,7 @@ public class Main {
     public static Mixer mixer=null;
     public static PitchDetection pitchDetection = new PitchDetection();
     public static String currData="";
+    public static boolean updData=false;
 
     public static void main(String[] args) {
         if(args.length==0||args.length==1){
@@ -58,11 +59,16 @@ public class Main {
                 t.sendResponseHeaders(200,0);
                 OutputStream os = t.getResponseBody();
                 while(true){
-                    os.write(("\n"+(currData.startsWith(";")?currData.substring(1):currData)).getBytes(StandardCharsets.US_ASCII));
-                    os.flush();
-                    try {
+                    System.out.flush();//what the FUCKKKKK
+                    if(updData&&!currData.equals("")) {
+                        updData=false;
+                        os.write(currData.getBytes(StandardCharsets.US_ASCII));
+                        currData="";
+                        os.flush();
+                    }
+                    /*try {
                         Thread.sleep(50);
-                    } catch (InterruptedException e) {}
+                    } catch (InterruptedException e) {}*/
                 }
             });
             server.setExecutor(null); // creates a default executor
@@ -75,7 +81,7 @@ public class Main {
                 }else{
                     try {
                         System.out.println("Starting stream on port "+port);
-                        Thread fard=(new Thread(() -> {
+                        /*Thread fard=(new Thread(() -> {
                             while(Thread.currentThread().isAlive()){
                                 currData="";
                                 try {
@@ -83,9 +89,9 @@ public class Main {
                                 } catch (InterruptedException e) {}
                             }
                         }));
-                        fard.start();
-                        PlaySong.playSong(songText.split("\n"));//hopefully this keeps it from exiting
-                        fard.stop();
+                        fard.start();*/
+                        PlaySong.playSong(songText.split("\n"));
+                        //fard.stop();
                         System.exit(0);
                     } catch (InterruptedException e) {}
                 }
@@ -93,10 +99,10 @@ public class Main {
                 pitchDetection.beginPitchDetection();
                 System.out.println("Starting stream on port "+port);
                 while(true){
-                    currData="";
+                    /*currData="";
                     try {
                         Thread.sleep(100);
-                    } catch (InterruptedException e) {}
+                    } catch (InterruptedException e) {}*/
                 }
             }
         } catch(NumberFormatException | IOException e){
