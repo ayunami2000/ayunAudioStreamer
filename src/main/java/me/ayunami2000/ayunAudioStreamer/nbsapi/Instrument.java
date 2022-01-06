@@ -21,7 +21,8 @@ public enum Instrument {
 	DIDGERIDOO (12),
 	BIT (13),
 	BANJO (14),
-	PLING (15);
+	PLING (15),
+	CUSTOM (-1);
 
 	private final int ID;
 	private Instrument(int ID) {
@@ -60,7 +61,7 @@ public enum Instrument {
 			case 13: return BIT;
 			case 14: return BANJO;
 			case 15: return PLING;
-			default: throw new IllegalArgumentException("ID must be from 0 to 15.");
+			default: return CUSTOM;//throw new IllegalArgumentException("ID must be from 0 to 15.");
 		}
 	}
 }

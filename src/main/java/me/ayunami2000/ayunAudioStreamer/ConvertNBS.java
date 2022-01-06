@@ -45,7 +45,8 @@ public class ConvertNBS {
             Song nbsSong = new Song(nbsFile);
             List<Layer> nbsSongBoard = nbsSong.getSongBoard();
             for (int i = 0; i < nbsSongBoard.size(); i++) {
-                HashMap<Integer, Note> noteList = nbsSongBoard.get(i).getNoteList();
+                Layer layer=nbsSongBoard.get(i);
+                HashMap<Integer, Note> noteList = layer.getNoteList();
                 for (Map.Entry note : noteList.entrySet()) {
                     Note noteInfo = (Note) note.getValue();
                     Integer noteKey=(int)((double)(int)note.getKey()/(5.0*((double)nbsSong.getTempo()/10000.0)));
@@ -53,7 +54,7 @@ public class ConvertNBS {
                     ArrayList<String> tickLines=songLines.get(noteKey);
                     //keep notes within 2-octave range
                     Integer notePitch=Math.max(33,Math.min(57,noteInfo.getPitch()))-33;
-                    tickLines.add(noteKey + ":" + notePitch + ":" + noteInfo.getInstrument().getID() + ":" + ((int)(127.0*noteInfo.getVelocity()/100.0)) + "\n");
+                    tickLines.add(noteKey + ":" + notePitch + ":" + noteInfo.getInstrument().getID() + ":" + ((int)(127.0*(layer.getVolume()*noteInfo.getVelocity())/10000.0)) + ":" + noteInfo.getPanning() + ":" + noteInfo.getPrecisePitch() + "\n");
                     //todo: USE PANNING & PRECISE PITCH!!
                     songLines.put(noteKey,tickLines);
                 }

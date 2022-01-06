@@ -29,6 +29,7 @@ public class Note {
 		setInstrument(instrument);
 		setPitch(pitch);
 		setVelocity(velocity);
+		setPanning(panning);
 		setPrecisePitch(precisePitch);
 	}
 
