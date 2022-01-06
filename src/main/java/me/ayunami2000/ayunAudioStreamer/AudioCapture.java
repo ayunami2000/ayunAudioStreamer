@@ -14,7 +14,7 @@ public class AudioCapture {
             int[] midiToNote = MidiConverter.noteConv(0,(int)pitchToMidi);
             int noteToGame = (midiToNote[1]-MidiConverter.instrument_offsets[midiToNote[0]]) + midiToNote[0]*25;
 
-            Main.currData+=((int)Math.floor(noteToGame / 25))+","+(volumeToUsable/127.0)+","+(.5*(Math.pow(2,((double)(noteToGame%25))/12.0)))+",100\n";
+            Main.currData+=((int)Math.floor(noteToGame / 25))+","+(volumeToUsable/127.0)+","+(.5*(Math.pow(2,((double)(noteToGame%25))/12.0)))+",0\n";
             Main.updData=true;
         }
     }
