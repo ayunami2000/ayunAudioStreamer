@@ -3,8 +3,6 @@ package me.ayunami2000.ayunAudioStreamer;
 import me.ayunami2000.ayunAudioStreamer.AudioParser.Analysis.Analysis;
 
 public class AudioCapture {
-    private static String[] instruments=new String[]{"harp","basedrum","snare","hat","bass","flute","bell","guitar","chime","xylophone","iron_xylophone","cow_bell","didgeridoo","bit","banjo","pling"};
-
     public static void pitchDetect(Analysis analysis){
         if(analysis.maximum<1)return;
         double volumeToUsable = 12.0 * (Math.log(analysis.maximum / 440.0f) / Math.log(2)) + 69.0;

@@ -1,6 +1,5 @@
 package me.ayunami2000.ayunAudioStreamer;
 
-import me.ayunami2000.ayunAudioStreamer.nbsapi.Instrument;
 import me.ayunami2000.ayunAudioStreamer.nbsapi.Layer;
 import me.ayunami2000.ayunAudioStreamer.nbsapi.Note;
 import me.ayunami2000.ayunAudioStreamer.nbsapi.Song;
@@ -14,6 +13,7 @@ import java.nio.file.Paths;
 import java.util.*;
 
 public class ConvertNBS {
+    private static final int[] nb2in=new int[]{0,2,3,4,1,6,7,5,8,9,10,11,12,13,14,15};
     public static String doConvert(String fileName){
         File nbsFile=new File(fileName);
         if(nbsFile.exists()&&!nbsFile.isDirectory()) {
@@ -54,7 +54,7 @@ public class ConvertNBS {
                     ArrayList<String> tickLines=songLines.get(noteKey);
                     //keep notes within 2-octave range
                     Integer notePitch=Math.max(33,Math.min(57,noteInfo.getPitch()))-33;
-                    tickLines.add(noteKey + ":" + notePitch + ":" + noteInfo.getInstrument().getID() + ":" + ((int)(127.0*(layer.getVolume()*noteInfo.getVelocity())/10000.0)) + ":" + noteInfo.getPanning() + ":" + noteInfo.getPrecisePitch() + "\n");
+                    tickLines.add(noteKey + ":" + notePitch + ":" + nb2in[noteInfo.getInstrument().getID()] + ":" + ((int)(127.0*(layer.getVolume()*noteInfo.getVelocity())/10000.0)) + ":" + noteInfo.getPanning() + ":" + noteInfo.getPrecisePitch() + "\n");
                     //todo: USE PANNING & PRECISE PITCH!!
                     songLines.put(noteKey,tickLines);
                 }
