@@ -14,7 +14,6 @@ import java.nio.file.Paths;
 import java.util.*;
 
 public class ConvertNBS {
-    public static List instruList= Arrays.asList("HARP","DRUM","SNARE","CLICK","BASS","FLUTE","BELL","GUITAR","CHIME","XYLOPHONE");
     public static String doConvert(String fileName){
         File nbsFile=new File(fileName);
         if(nbsFile.exists()&&!nbsFile.isDirectory()) {
@@ -54,7 +53,8 @@ public class ConvertNBS {
                     ArrayList<String> tickLines=songLines.get(noteKey);
                     //keep notes within 2-octave range
                     Integer notePitch=Math.max(33,Math.min(57,noteInfo.getPitch()))-33;
-                    tickLines.add(noteKey + ":" + notePitch + ":" + convertInstrument(noteInfo.getInstrument()) + "\n");
+                    tickLines.add(noteKey + ":" + notePitch + ":" + noteInfo.getInstrument().getID() + ":" + (127.0*noteInfo.getVelocity()/100.0) + "\n");
+                    //todo: USE PANNING & PRECISE PITCH!!
                     songLines.put(noteKey,tickLines);
                 }
             }
@@ -71,9 +71,5 @@ public class ConvertNBS {
             System.out.println("There was an error while converting your NBS.");
             return null;
         }
-    }
-    private static Integer convertInstrument(Instrument instr){
-        Integer instrId=instruList.indexOf(instr.name());
-        return instrId==-1?0:instrId;
     }
 }

@@ -81,18 +81,9 @@ public class Main {
                 }else{
                     try {
                         System.out.println("Starting stream on port "+port);
-                        /*Thread fard=(new Thread(() -> {
-                            while(Thread.currentThread().isAlive()){
-                                currData="";
-                                try {
-                                    Thread.sleep(100);
-                                } catch (InterruptedException e) {}
-                            }
-                        }));
-                        fard.start();*/
-                        PlaySong.playSong(songText.split("\n"));
-                        //fard.stop();
-                        System.exit(0);
+                        while(true) {
+                            PlaySong.playSong(songText.split("\n"));
+                        }
                     } catch (InterruptedException e) {}
                 }
             }else{
