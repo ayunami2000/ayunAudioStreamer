@@ -139,7 +139,6 @@ public class Song {
 				if (jumpLayers == 0) break;
 				layer += jumpLayers;
 				while (songBoard.size() < layer+1) {
-					//note: does not seem to parse any layer data from the noteblock file
 					songBoard.add(new Layer("",(byte) 100));
 				}
 				songBoard.get(layer).setNote(tick, new Note(Instrument.fromID(in.readByte()), in.readByte(), isONBS?in.readByte():100, isONBS?(in.readByte() & 0xFF):100, isONBS?in.readShort():0));
@@ -147,7 +146,13 @@ public class Song {
 		}
 		for (int i = 0; i < getHeight(); i++) {
 			songBoard.get(i).setName(readString());
-			songBoard.get(i).setVolume(in.readByte());
+			if(isONBS){
+				byte lock=in.readByte();
+				songBoard.get(i).setVolume(in.readByte());
+				byte stereo=in.readByte();
+			}else{
+				songBoard.get(i).setVolume(in.readByte());
+			}
 		}
 		in.close();
 		instream.close();
@@ -260,7 +265,8 @@ public class Song {
 	}
 	public void setTempo(short tempo) throws IllegalArgumentException {
 		if (tempo < 25) throw new IllegalArgumentException("Tempo is too small!");
-		if (tempo%25 != 0) throw new IllegalArgumentException("Tempo must be a multiplication of 25.");
+		//if (tempo%25 != 0) throw new IllegalArgumentException("Tempo must be a multiplication of 25.");
+		if (tempo%25 != 0) tempo = (short) (25*(tempo/25));
 		this.tempo = tempo;
 	}
 	public boolean isAutoSaveEnabled() {

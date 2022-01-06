@@ -68,6 +68,7 @@ public class ConvertNBS {
             if(resSongFile.endsWith("\n"))resSongFile=resSongFile.substring(0,resSongFile.length()-1);
             return resSongFile;
         }catch(Exception e){
+            e.printStackTrace();
             System.out.println("There was an error while converting your NBS.");
             return null;
         }
