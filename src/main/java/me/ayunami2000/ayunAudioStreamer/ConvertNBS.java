@@ -53,7 +53,7 @@ public class ConvertNBS {
                     ArrayList<String> tickLines=songLines.get(noteKey);
                     //keep notes within 2-octave range
                     Integer notePitch=Math.max(33,Math.min(57,noteInfo.getPitch()))-33;
-                    tickLines.add(noteKey + ":" + notePitch + ":" + noteInfo.getInstrument().getID() + ":" + (127.0*noteInfo.getVelocity()/100.0) + "\n");
+                    tickLines.add(noteKey + ":" + notePitch + ":" + noteInfo.getInstrument().getID() + ":" + ((int)(127.0*noteInfo.getVelocity()/100.0)) + "\n");
                     //todo: USE PANNING & PRECISE PITCH!!
                     songLines.put(noteKey,tickLines);
                 }
