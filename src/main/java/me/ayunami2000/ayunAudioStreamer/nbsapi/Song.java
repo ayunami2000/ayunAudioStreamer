@@ -141,7 +141,7 @@ public class Song {
 				while (songBoard.size() < layer+1) {
 					songBoard.add(new Layer("",(byte) 100));
 				}
-				songBoard.get(layer).setNote(tick, new Note(Instrument.fromID(in.readByte()), in.readByte(), isONBS?in.readByte():100, isONBS?(in.readByte() & 0xFF):100, isONBS?in.readShort():0));
+				songBoard.get(layer).setNote(tick, new Note(Instrument.fromID(in.readByte()), in.readByte(), isONBS ? in.readByte() : 100, isONBS ? (in.readByte() & 0xFF) : 100, isONBS ? ((Short)in.readShort()).intValue() : 32768));
 			}
 		}
 		for (int i = 0; i < getHeight(); i++) {
