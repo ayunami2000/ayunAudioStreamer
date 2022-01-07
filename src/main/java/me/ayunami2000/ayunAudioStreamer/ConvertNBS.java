@@ -13,7 +13,7 @@ import java.nio.file.Paths;
 import java.util.*;
 
 public class ConvertNBS {
-    private static final int[] nb2in=new int[]{0,2,3,4,1,6,7,5,8,9,10,11,12,13,14,15};
+    private static final int[] nb2in=new int[]{0,4,1,2,3,7,5,6,8,9,10,11,12,13,14,15};
     public static String doConvert(String fileName){
         File nbsFile=new File(fileName);
         if(nbsFile.exists()&&!nbsFile.isDirectory()) {

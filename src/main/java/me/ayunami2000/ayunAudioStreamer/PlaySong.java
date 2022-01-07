@@ -1,7 +1,6 @@
 package me.ayunami2000.ayunAudioStreamer;
 
 public class PlaySong {
-    private static String[] instruments=new String[]{"harp","basedrum","snare","hat","bass","flute","bell","guitar","chime","xylophone","iron_xylophone","cow_bell","didgeridoo","bit","banjo","pling"};
     public static void playSong(String[] songLines) throws InterruptedException {
         int ticks=0;
         for (String songLine : songLines) {
