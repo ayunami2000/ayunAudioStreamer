@@ -1,5 +1,7 @@
 package me.ayunami2000.ayunAudioStreamer.nbsapi;
 
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.util.*;
 import java.io.*;
 
@@ -141,7 +143,7 @@ public class Song {
 				while (songBoard.size() < layer+1) {
 					songBoard.add(new Layer("",(byte) 100));
 				}
-				songBoard.get(layer).setNote(tick, new Note(Instrument.fromID(in.readByte()), in.readByte(), isONBS ? in.readByte() : 100, isONBS ? (in.readByte() & 0xFF) : 100, isONBS ? ((Short)in.readShort()).intValue() : 32768));
+				songBoard.get(layer).setNote(tick, new Note(Instrument.fromID(in.readByte()), in.readByte(), isONBS ? in.readByte() : 100, isONBS ? (in.readByte() & 0xFF) : 100, isONBS ? ByteBuffer.allocate(8).order(ByteOrder.BIG_ENDIAN).putShort(in.readShort()).order(ByteOrder.LITTLE_ENDIAN).getShort(0) : 0));
 			}
 		}
 		for (int i = 0; i < getHeight(); i++) {

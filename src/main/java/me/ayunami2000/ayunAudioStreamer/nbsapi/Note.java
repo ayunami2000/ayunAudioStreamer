@@ -21,16 +21,16 @@ public class Note {
 	 * @param precisePitch The precise pitch of the note (-32767-32767).
 	 * @throws IllegalArgumentException
 	 */
-	public Note(Instrument instrument, byte pitch, byte velocity, int panning, int precisePitch) throws IllegalArgumentException {
+	public Note(Instrument instrument, byte pitch, byte velocity, int panning, short precisePitch) throws IllegalArgumentException {
 		if (pitch < 0 || pitch > 87) throw new IllegalArgumentException("Pitch must be from 0 to 87.");
 		if (velocity < 0 || velocity > 100) throw new IllegalArgumentException("Velocity must be from 0 to 100.");
 		if (panning < 0 || panning > 200) throw new IllegalArgumentException("Panning must be from 0 to 100.");
-		if (precisePitch < -32767 || precisePitch > 32767) precisePitch = (pitch-55)*100/*(pitch-33)*100-1200*/;//throw new IllegalArgumentException("Precise pitch must be from -32767 to 32767.");
+		if (precisePitch < -32767 || precisePitch > 32767) throw new IllegalArgumentException("Precise pitch must be from -32767 to 32767.");
 		setInstrument(instrument);
 		setPitch(pitch);
 		setVelocity(velocity);
 		setPanning(panning);
-		setPrecisePitch((short)precisePitch);
+		setPrecisePitch(precisePitch);
 	}
 
 	public Instrument getInstrument() {
